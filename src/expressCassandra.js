@@ -51,7 +51,8 @@ CassandraClient.syncModelFileToDB = (file, callback) => {
     // eslint-disable-next-line import/no-dynamic-require
     const modelSchema = require(fileLocation);
     CassandraClient.modelInstance[modelName] = CassandraClient.orm.addModel(modelName.toLowerCase(), modelSchema);
-    CassandraClient.modelInstance[modelName].syncDB(callback);
+    //CassandraClient.modelInstance[modelName].syncDB(callback); // commenting out so not to sync tables
+    callback(null, false);
     CassandraClient.modelInstance[modelName] = Promise.promisifyAll(CassandraClient.modelInstance[modelName]);
     return;
   }
